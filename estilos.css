@@ -1,7 +1,7 @@
 body {margin:25px;}
 
 body {
-        background-image: url(imagens/background_theme.jpg);
+        background-image: url(background_theme.jpg);
         background-size: 70%;
         background-attachment: fixed;
         height: auto;
@@ -23,7 +23,7 @@ dic.row {
     }
         
 div.polaroid {
-        width: 40%;
+        width: 80%;
         background-color: white;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0  rgba(0, 0, 0, 0.19);
         margin-bottom: 25px;
