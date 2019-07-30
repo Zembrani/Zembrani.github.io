@@ -1,110 +1,141 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="description" content="Catálogo com fotos expositivas dos produtos da loja">
     <style>
         @import url(estilos.css);
     </style>
+    <link type="text/css" rel="stylesheet" href="style.css" />
     <title>Bom Jardim Catálogo</title>
 </head>
-    <body>
+
+<body>
+
+    <div class="container">
 
         <h1>Catálogo de peças Cerâmica Bom Jardim</h1>
-    <table class="images_tables" style="table-layout: fixed" width="100%">
-        <tbody>
-            <tr>
-                <td style="width: 25%; word-wrap: break-word">
-                    <div class="row">
-                        <div class="polaroid">
-                        <img src=" a.jpg" alt="Vasos Agarrados" style="width:100%">
-                        <div class="container">
-                            <p>Vasos Agarrados</p>
-                        </div>
-                        </div>
-                    </div>
-                </td>
 
-                <td style="width: 25%; word-wrap: break-word">
-                    <div class="row">
-                        <div class="polaroid">
-                        <img src=" b.jpg" alt="Vasos Vazados" style="width:100%">
-                        <div class="container">
-                            <p>Vasos Vazados</p>
-                        </div>
-                        </div>
-                    </div>
-                </td>
-                
-                <td style="width: 25%; word-wrap: break-word">
-                    <div class="row">
-                        <div class="polaroid">
-                        <img src=" c.jpg" alt="Vasos Jarra" style="width:100%">
-                        <div class="container">
-                            <p>Vasos Jarra</p>
-                        </div>
-                        </div>
-                    </div>
-                </td>
-                
-                <td style="width: 25%; word-wrap: break-word">
-                    <div class="row">
-                        <div class="polaroid">
-                        <img src=" d.jpg" alt="Papai e mamae noel" style="width:100%">
-                        <div class="container">
-                            <p>Papai e mamae noel</p>
-                        </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 25%; word-wrap: break-word">
-                    <div class="row">
-                        <div class="polaroid">
-                        <img src=" a.jpg" alt="Vasos Agarrados" style="width:100%">
-                        <div class="container">
-                            <p>Vasos Agarrados</p>
-                        </div>
-                        </div>
-                    </div>
-                </td>
+        <div class="row">
 
-                <td style="width: 25%; word-wrap: break-word">
-                    <div class="row">
-                        <div class="polaroid">
-                        <img src=" b.jpg" alt="Vasos Vazados" style="width:100%">
-                        <div class="container">
-                            <p>Vasos Vazados</p>
+            <div class="wrapper-card">
+                <div class="image">
+                    <img src="images/a.jpg" alt="Vasos Agarrados">
+                </div>
+                <div class="description">
+                    Imagem 1
+                </div>
+            </div>
+
+            <div class="wrapper-card">
+                <div class="image">
+                    <img src="images/a.jpg" alt="Vasos Agarrados">
+                </div>
+                <div class="description">
+                    Imagem 2
+                </div>
+            </div>
+
+            <div class="wrapper-card">
+                <div class="image">
+                    <img src="images/a.jpg" alt="Vasos Agarrados">
+                </div>
+                <div class="description">
+                    Imagem 3
+                </div>
+            </div>
+
+            <div class="wrapper-card">
+                <div class="image">
+                    <img src="images/a.jpg" alt="Vasos Agarrados">
+                </div>
+                <div class="description">
+                    Imagem 4
+                </div>
+            </div>        </div>
+
+        <!--<table class="images_tables">
+            <tbody>
+                <tr>
+                    <td class="col">
+                        <div class="cell">
+                            <img src="images/a.jpg" alt="Vasos Agarrados" class="image">
+                            <div class="container">
+                                <p>Vasos Agarrados</p>
+                            </div>
                         </div>
+                    </td>
+
+                    <td class="col">
+                        <div class="cell">
+                            <img src="images/b.jpg" alt="Vasos Vazados" class="image">
+                            <div class="container">
+                                <p>Vasos Vazados</p>
+                            </div>
                         </div>
-                    </div>
-                </td>
-                
-                <td style="width: 25%; word-wrap: break-word">
-                    <div class="row">
-                        <div class="polaroid">
-                        <img src=" c.jpg" alt="Vasos Jarra" style="width:100%">
-                        <div class="container">
-                            <p>Vasos Jarra</p>
+                    </td>
+
+                    <td class="col">
+                        <div class="cell">
+                            <img src="images/c.jpg" alt="Vasos Jarra" class="image">
+                            <div class="container">
+                                <p>Vasos Jarra</p>
+                            </div>
                         </div>
+                    </td>
+
+                    <td class="col">
+                        <div class="cell">
+                            <img src="images/d.jpg" alt="Papai e mamae noel" class="image">
+                            <div class="container">
+                                <p>Papai e mamae noel</p>
+                            </div>
                         </div>
-                    </div>
-                </td>
-                
-                <td style="width: 25%; word-wrap: break-word">
-                    <div class="row">
-                        <div class="polaroid">
-                        <img src=" d.jpg" alt="Papai e mamae noel" style="width:100%">
-                        <div class="container">
-                            <p>Papai e mamae noel</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col">
+                        <div class="cell">
+                            <img src="images/a.jpg" alt="Vasos Agarrados" class="image">
+                            <div class="container">
+                                <p>Vasos Agarrados</p>
+                            </div>
                         </div>
+                    </td>
+
+                    <td class="col">
+                        <div class="cell">
+                            <img src="images/b.jpg" alt="Vasos Vazados" class="image">
+                            <div class="container">
+                                <p>Vasos Vazados</p>
+                            </div>
                         </div>
-                    </div>
-                </td>
-            </tr>    
-            
-        </tbody>
-    </table>
-    </body>
+                    </td>
+
+                    <td class="col">
+                        <div class="cell">
+                            <img src="images/c.jpg" alt="Vasos Jarra" class="image">
+                            <div class="container">
+                                <p>Vasos Jarra</p>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="col">
+                        <div class="cell">
+                            <img src="images/d.jpg" alt="Papai e mamae noel" class="image">
+                            <div class="container">
+                                <p>Papai e mamae noel</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>-->
+
+    </div>
+</body>
+
 </html>
