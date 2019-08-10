@@ -3,8 +3,6 @@ html, body {
     margin: 0;
 }
 
-
-
 h1 {
     font-variant-position: '';
     text-align: center;
@@ -24,7 +22,7 @@ h1 {
 
 /* Flex */
 .flex {
-	display: flex;
+    display: flex;
 }
 
 .flex-wrap {
@@ -32,13 +30,14 @@ h1 {
 }
 
 .wrapper-card {
-    flex: 4;
+    flex-shrink: 0;
+    flex: 190px;
     margin: 5px;
     display: flex;
     flex-direction: column;
     text-align: center;
     padding: 20px;
-    height: 200px;
+    height: auto;
 }
 
 .image {
@@ -46,13 +45,13 @@ h1 {
 }
 
 .image img {
-    width: 200px;
+    width: 100%;
     border-radius: 5px 5px 0 0;
 }
 
 .description {
-    width: 160PX;
-    margin: auto;
+    width: auto;
+    margin: 5px;
     flex: 4;
     padding: 20px;
     text-align: center;
