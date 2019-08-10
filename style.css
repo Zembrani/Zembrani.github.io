@@ -3,11 +3,7 @@ html, body {
     margin: 0;
 }
 
-.container {
-    width: 1200px;
-    margin-right: auto;
-    margin-left: auto;
-}
+
 
 h1 {
     font-variant-position: '';
@@ -20,13 +16,24 @@ h1 {
     border-color: #ffffff;
 }
 
-.row {
-    display: flex;
-    flex-direction: row;
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	border: 1px solid #ccc;
+}
+
+/* Flex */
+.flex {
+	display: flex;
+}
+
+.flex-wrap {
+	flex-wrap: wrap;
 }
 
 .wrapper-card {
     flex: 4;
+    margin: 5px;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -39,46 +46,16 @@ h1 {
 }
 
 .image img {
-    width: 100%;
+    width: 200px;
     border-radius: 5px 5px 0 0;
 }
 
 .description {
+    width: 160PX;
+    margin: auto;
     flex: 4;
-    padding: 15px;
+    padding: 20px;
     text-align: center;
-    background-color: rgb(204, 204, 204);
+    background-color: rgb(133, 133, 133);
     border-radius: 0 0 5px 5px;
 }
-
-/*table, tr, td {    
-    border: none;
-}
-
-table {
-    width: 100%;
-}
-
-.col {
-    word-wrap: break-word;
-    background-color: white;
-    margin-bottom: 25px;
-}
-
-.cell {
-    margin: 30px;
-    box-shadow: 3px 3px 5px rgb(165, 165, 165);
-    border-radius: 5px;
-}
-
-.container {
-    text-align: center;
-    padding: 1px 20px;
-    line-height: 10px;
-}
-
-.image {
-    width: 100%;
-}
-
-*/
