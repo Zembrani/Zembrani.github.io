@@ -3,6 +3,7 @@
 <p> 
   Este projeto surgiu para criar um catálogo com os produtos disponíveis na loja dos meus pais. 
 </p>
+<a href="https://zembrani.github.io/cat%C3%A1logo%20Cer%C3%A2mica%20Bom%20Jardim/" style="text-color:blue"> Veja como está</a>
 <p>
   No momento este está parado devido ao baixo conhecimento em JS.
 </p>
