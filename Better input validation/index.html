@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>JavaScript Challenges</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <script type="text/javascript" src="textVerification.js"></script>
+  <body>
+    <form action="mailto:me@fakeemail.com" id="userfeedbackform">
+		<fieldset>
+
+			<legend>Personal details</legend>
+			<p>
+				<label>
+					Full name:
+					<input type="text" name="fullname" id="fullname" placeholder="Full name" size="35" maxlength="35" pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$">
+				</label>
+			</p>
+			<p class="errormsg" id="nameerrormsg">Please enter your name above</p>
+			<p>
+				<label>
+					Street Address:
+					<input type="text" name="streetaddr" id="streetaddr" placeholder="Street Address" size="35" maxlength="35">
+				</label>
+			</p>
+			<p class="errormsg" id="addrerrormsg">Please enter your street address</p>
+			<p>
+				<label>
+					House Number:
+					<input type="text" name="housenmbr" id="housenmbr" placeholder="Number house" size="3" maxlength="3" pattern="^[0-9]*$">
+				</label>
+			</p>
+			<p class="errormsg" id="nmbrerrormsg">Please enter your house number</p>
+			<p>
+				<label>
+					Postcode:
+					<input type="text" name="postcodenmbr" id="postcodenmbr" placeholder="Postcode" size="9" maxlength="9" pattern="^[0-9]{9}$">
+				</label>
+			</p>
+			<p class="errormsg" id="postcodeerrormsg" value="Please enter your postcode">Please enter your postcode</p>
+			<p>
+				<label>
+					Email address:
+					<input type="email" name="emailaddress" id="emailaddress" placeholder="Email address" size="35" maxlength="35">
+				</label>
+			</p>
+			<p class="errormsg" id="emailaddresserrormsg" value="Please enter your email address">Please enter your email address</p>
+			
+		</fieldset>
+		<input type="submit" value="Submit it!"> 
+	</form>
+  </body>
+</html>
