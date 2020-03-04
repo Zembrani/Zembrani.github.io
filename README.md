@@ -9,3 +9,5 @@ Neste repositório estão alguns projetos que no momento são importantes para q
 
 - [Better input validation](https://zembrani.github.io/Better%20input%20validation/) - Quarto, quinto e sexto exercício retirados do site: [Web Design/JavaScript Challenges](https://en.wikiversity.org/wiki/Web_Design/JavaScript_Challenges) - Consiste em campos de preenchimento e suas devidas validações feitas em JS.
 
+- [Projeto Glass HTML5 - treinamento](https://zembrani.github.io/projeto-glass-html5-treinamento/) - Este é um projeto realizado no treinamento fornecido pela empresa. Consiste em criar uma página web com elementos básicos de um site.
+
