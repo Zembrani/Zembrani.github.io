@@ -11,3 +11,4 @@ Neste repositório estão alguns projetos que no momento são importantes para q
 
 - [Projeto Glass HTML5 - treinamento](https://zembrani.github.io/projeto-glass-html5-treinamento/) - Este é um projeto realizado no treinamento fornecido pela empresa. Consiste em criar uma página web com elementos básicos de um site.
 
+- [Projeto Calculadora do windows - treinamento](https://zembrani.github.io/Windows-Calculator/) - Este é um projeto realizado durante o treinamento de aprendizado, utilizando JS Vanilla, CSS e HTML.
