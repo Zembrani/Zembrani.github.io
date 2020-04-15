@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Calculadora Windows</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quattrocento+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+</head>
+<script type="text/javascript" src="javascript.js"></script>
+
+
+<body>
+    <div id="container">
+        <div id="top">
+            <div id="header">
+                <div id="title" class="not-selectable">Calculator</div>
+                <div id="tab-icons">
+                    <div class="buttonH
+                    overTop buttonActiveTop" id="min" title="Minimize">&nbsp</div>
+                    <div class="buttonHoverTop buttonActiveTop" id="max" title="Maximise">&nbsp</div>
+                    <div id="close" title="Close">&nbsp</div>
+                </div>
+            </div>
+            <div id="options">
+                <div class="buttonHoverTop buttonActiveTop" id="menuOptions" title="Open Navigation"></div>
+                <div class="buttonHoverTop buttonActiveTop" id="history" title="History"></div>
+            </div>
+            <div id="result">
+                <div class="not-selectable" id="expression"></div>
+                <div id="res">0</div>
+                <div id="aux">0</div>
+            </div>
+        </div>
+        <div class="not-selectable" id="mwindow">
+            <span>There's nothing saved in your memory.</span>
+        </div>
+        <div class="not-selectable" id="bottom">
+
+            <div class="row">
+                <span id="mc" class="toprow buttonHoverBottom buttonActiveBottom" title="Clean All Memory">MC</span>
+                <span id="mr" class="toprow buttonHoverBottom buttonActiveBottom" title="Memory Recall">MR</span>
+                <span id="mplus" class="toprow buttonHoverBottom buttonActiveBottom" title="Memory Add">M+</span>
+                <span id="mminus" class="toprow buttonHoverBottom buttonActiveBottom" title="Memory Subtraction">M-</span>
+                <span id="ms" class="toprow buttonHoverBottom buttonActiveBottom" title="Memory Store">MS</span>
+                <span id="m" class="toprow buttonHoverBottom buttonActiveBottom" title="Memory">M</span>
+            </div>
+
+            <div id="flex-container">
+                <div class="row">
+                    <span id="porcentage" class="buttonHoverBottom buttonActiveBottom">%</span>
+                    <span id="CE" class="C buttonHoverBottom buttonActiveBottom">CE</span>
+                    <span id="C" class="C buttonHoverBottom buttonActiveBottom">C</span>
+                    <span id="backspace" class="buttonHoverBottom buttonActiveBottom">&#8678;</span>
+                </div>
+                <div class="row">
+                    <span id="inverseMult" class="xitalic buttonHoverBottom buttonActiveBottom">&#8543;x</span>
+                    <span id="pow" class="xitalic buttonHoverBottom buttonActiveBottom">x²</span>
+                    <span id="sqrt" class="xitalic buttonHoverBottom buttonActiveBottom">&radic;x</span>
+                    <span data-number="/" class="buttonHoverBottom buttonActiveBottom">&#xF7;</span>
+                </div>
+                <div class="row">
+                    <span data-number="7" class="numbers font buttonHoverBottom buttonActiveBottom">7</span>
+                    <span data-number="8" class="numbers font buttonHoverBottom buttonActiveBottom">8</span>
+                    <span data-number="9" class="numbers font buttonHoverBottom buttonActiveBottom">9</span>
+                    <span data-number="*" class="buttonHoverBottom buttonActiveBottom">&#215;</span>
+                </div>
+                <div class="row">
+                    <span data-number="4" class="numbers font buttonHoverBottom buttonActiveBottom">4</span>
+                    <span data-number="5" class="numbers font buttonHoverBottom buttonActiveBottom">5</span>
+                    <span data-number="6" class="numbers font buttonHoverBottom buttonActiveBottom">6</span>
+                    <span data-number="-" class="buttonHoverBottom buttonActiveBottom">-</span>
+                </div>
+                <div class="row">
+                    <span data-number="1" class="numbers font buttonHoverBottom buttonActiveBottom">1</span>
+                    <span data-number="2" class="numbers font buttonHoverBottom buttonActiveBottom">2</span>
+                    <span data-number="3" class="numbers font buttonHoverBottom buttonActiveBottom">3</span>
+                    <span data-number="+" class="buttonHoverBottom buttonActiveBottom">+</span>
+                </div>
+                <div class="row">
+                    <span id="neg" class="numbers font2 buttonHoverBottom buttonActiveBottom">+/-</span>
+                    <span data-number="0" class="numbers font buttonHoverBottom buttonActiveBottom">0</span>
+                    <span id="dot" class="numbers font2 buttonHoverBottom buttonActiveBottom">.</span>
+                    <span id="equal" class="equal buttonHoverBottom buttonActiveBottom">=</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
