@@ -89,7 +89,7 @@ function screen(number) {
         if (lastSymbol in symbol && oldVal == "1") {
             expreVal = expreVal.substring(0, expreVal.length - 1);
             temp = lastIsDot(expreVal);
-            expression.innerHTML = tmep + symbol[number];
+            expression.innerHTML = temp + symbol[number];
             oldVal = "0";
         } else if (oldVal == "3") {
             // console.log(expreVal);
@@ -100,22 +100,20 @@ function screen(number) {
             temp = lastIsDot(expreVal + resVal);
             expression.innerHTML = temp + symbol[number];
         }
-        if (oldVal == "1") {
-            var tempExpre = expreVal + resVal;
-            tempExpre = eval(tempExpre);
-            res.innerHTML = verifyScreen(tempExpre);
-        }
         aux.innerHTML = "1";
     }
 
     //--------Current values ​​in variables------------//
 
-    resVal = cleanComma(verifyScreen(res.innerHTML));
+    resVal = getRes();
     expreVal = expression.innerHTML;
 
+    function getRes() {
+        return cleanComma(res.innerHTML);
+    }
     //--------------------Remove number--------------------------//
     remove.onclick = function () {
-        let temp = cleanComma(res.innerHTML);
+        let temp = getRes();
         if (temp.length > 1) {
             temp = temp.slice(0, -1);
             res.innerHTML = verifyScreen(temp);
@@ -143,22 +141,23 @@ function screen(number) {
         var result;
         var tempExpre
         oldVal = aux.innerHTML;
-        lastSymbol = expreVal.substring(expreVal.length-1, expreVal.length);
+        lastSymbol = expreVal.substring(expreVal.length - 1, expreVal.length);
         // console.log("oldval equal = " + oldVal);
-  
+        console.log("resval = " + resVal);
+
         if (oldVal == "2") {
             // console.log("oldval == 2");
             tempExpre = expression.innerHTML;
-            
+
             // console.log("lastSymbol " + lastSymbol);
             var index = tempExpre.lastIndexOf(lastSymbol);
             if (index !== -1) {
                 tempExpre = tempExpre.substring(index, tempExpre.length - 2);
             }
-            
+
             tempExpre = resVal + tempExpre;
             // console.log("temp expre dentro do if " + tempExpre);
-            if(tempExpre.includes("=")) {
+            if (tempExpre.includes("=")) {
                 aux.innerHTML = "2";
                 return;
             }
@@ -170,41 +169,12 @@ function screen(number) {
             }
             tempExpre = expreVal + resVal;
         }
-        //console.log(oldVal);
-
-        if(tempExpre.includes(".")) {
-            result = eval(tempExpre).toString();
-            // console.log("result = " + result);
-            let length = result.length;
-            let indexDot = result.indexOf(".");
-            console.log("indexdot = " + indexDot);
-            // console.log("tamanho = " + length);
-                result = parseFloat(result).toPrecision(10);
-
-            result = result.toString();
-            let cond = true;
-            console.log(result);
-            
-            while(cond==true){
-                let lastSymbol = result.substring(result.length-1, result.length);
-                if(lastSymbol=="0") {
-                    result = result.substring(0, result.length-1);
-                    cond = true;
-                } else if(lastSymbol=="."){
-                    result = result.substring(0, result.length-1);
-                    cond = false;
-                }else{
-                    cond = false;
-                }
-            }
-        }else{
-            result = eval(tempExpre);
-        }
-        result = result.toString();
+                
+        result = operation(tempExpre).toString();
         var firstSymbol = result.substring(0, 1);
         var length = firstSymbol == "-" ? result.length - 1 : result.length;
 
-        if (length > 11) {
+        if (length > 12) {
             expression.innerHTML = "";
             res.innerHTML = "Overflow";
         } else {
@@ -215,6 +185,17 @@ function screen(number) {
         }
 
 
+    }
+
+    function operation(expre) {
+        let result = eval(expre).toString();
+        console.log("precision = " + getBigger(getRes(), result));
+        let length = getBigger(getRes(), result);
+        if(length>7) length = 7;
+        result = Number(result).toPrecision(length);
+        result = removeZerosAtRight(result);
+        console.log(result);
+        return result;
     }
 
     dot.onclick = function () {
@@ -238,7 +219,7 @@ function screen(number) {
             res.innerHTML = verifyScreen("-" + resVal);
         }
     }
-//--------------------Functions--------------------------//
+    //--------------------Functions--------------------------//
     inverseMult.onclick = function () {
         let value = res.innerHTML;
         let result = 0;
@@ -265,9 +246,9 @@ function screen(number) {
     pow.onclick = function () {
         verifyEqual();
 
-        let value = cleanComma(res.innerHTML);
+        let value = getRes();
         let result = parseFloat(Math.pow(value, 2).toFixed(3));
-        result = result.toString();
+        result =  operation(result).toString();
 
         if (result.length > 11) {
             expression.innerHTML = "";
@@ -282,7 +263,7 @@ function screen(number) {
 
         verifyEqual();
 
-        let value = cleanComma(res.innerHTML);
+        let value = getRes();
         let result = parseFloat(Math.sqrt(value).toFixed(6));
         result = result.toString();
 
@@ -344,8 +325,8 @@ function screen(number) {
         if (res.innerHTML.includes("er")) {
             return
         } else {
-            let result = eval(cleanComma(verifyIfIsText(mwindow.innerHTML)) + "+" + cleanComma(res.innerHTML));
-            verifyIfIsOverflow(result);
+            let result = (Number(getMwindow()) + Number(getRes()));
+            setMwindow(result);
         }
     }
 
@@ -353,10 +334,22 @@ function screen(number) {
         if (res.innerHTML.includes("er")) {
             return
         } else {
-            let result = eval(cleanComma(verifyIfIsText(mwindow.innerHTML)) + "-(" + cleanComma(res.innerHTML) + ")");
-            verifyIfIsOverflow(result);
+            let result = (Number(getMwindow()) - Number(getRes()));
+            setMwindow(result);
         }
     }
+
+    function getMwindow() {
+        return cleanComma(verifyIfIsText(mwindow.innerHTML));
+    }
+
+    function setMwindow(value) {
+        console.log(value);
+        mwindow.innerHTML = verifyMemoryScreen(value);
+        textSize();
+        aux.innerHTML = "3";
+    }
+
 
     function textSize() {
         mwindow.style.fontSize = mwindow.innerHTML.includes('er') ? '11pt' : '20pt';
@@ -367,47 +360,70 @@ function screen(number) {
         return value.includes("er") ? "0" : value;
     }
 
-    function verifyIfIsOverflow(result) {
+    function verifyMemoryScreen(result) {
         result = result.toString();
+        // console.log(result);
         let firstSymbol = result.substring(0, 1);
-        var length = firstSymbol == "-" ? result.length - 1 : result.length;
-        var negative = firstSymbol == "-" ? true : false;
+        let negative = firstSymbol == "-" ? true : false;
 
-        if (length > 11) {
-            mwindow.innerHTML = "Overflow";
-        } else if(negative) {
-            result = mwindow.innerHTML.includes('There') ? res.innerHTML : verifyMemory(result.substring(1, length+1), length);
-            mwindow.innerHTML = "-" + result;
+        // console.log("tamanho mwindow = " + length);
+        if (negative) {
+            result = mwindow.innerHTML.includes('There') ? getRes() : formatMemory(result.substring(1, result.length));
+            return "-" + result;
         } else {
-            mwindow.innerHTML = mwindow.innerHTML.includes('There') ? res.innerHTML : verifyMemory(result, length);
+            return mwindow.innerHTML.includes('There') ? getRes() : formatMemory(result);
         }
-        textSize();
-        aux.innerHTML = "3";//sempre que o result é 0 ele altera o tamanho do res para o tamanho original.
     }
 
-    function verifyMemory(value, length) {
-        var indexDot = findDot(value);
-        if (indexDot > 3) {
-            value = addComma(value, indexDot);
-        }
-        if (length<14) {
-            return value;
-        } else {
-            return verifyMemory(value.substring(0, value.length - 1));
-        }
+    function formatMemory(value) {
+        let length = getBigger(getRes(), getMwindow());
+        // console.log("tamanho em verifyM = " + length);
+        value = Number(value).toPrecision(length);
+        value = removeZerosAtRight(value);
+        return value = addComma(value.toString());
+    }
 
+    function getBigger(value1, value2) {
+        let length1 = value1.length + 1;
+        let length2 = value2.length + 1;
+        let value = length1 > length2 ? length1 : length2;
+        // console.log("teste = " + teste);
+        return value > 11 ? 11 : value;
+    }
+
+    function removeZerosAtRight(result) {
+        let cond = true;
+        let indexOfe = result.indexOf("e");
+        let resultAux;
+        if(indexOfe !== -1){
+            console.log("aqui");
+            resultAux = result.split("e");
+            console.log(resultAux[0]);
+            console.log(resultAux[1]);
+            result = resultAux[0];
+        }
+        while (cond == true) {
+            let lastSymbol = result.substring(result.length - 1, result.length);
+            if (lastSymbol == "0") {
+                result = result.substring(0, result.length - 1);
+                cond = true;
+            } else if (lastSymbol == ".") {
+                result = result.substring(0, result.length - 1);
+                cond = false;
+            } else {
+                cond = false;
+            }
+        }
+        if(indexOfe !== -1) {
+            let resultAux2 = result + "e" + resultAux[1].toString();
+            return resultAux2.includes(".") ? result + "e" + resultAux[1].toString() : result + ".e" + resultAux[1].toString(); //2.e+11 and not 2e+11
+        } else {
+            return result;
+        }
     }
 }
 
 //-----Verifications on screen value, length, dot, comma---//
-
-function findDot(value) {
-    var indexDot = value.indexOf(".");
-    if (indexDot !== -1) {
-        return indexDot;
-    }
-    return value.length;
-}
 
 function cleanComma(value) {
     var index = value.indexOf(",");
@@ -418,16 +434,16 @@ function cleanComma(value) {
     return value;
 }
 
-function addComma(value, indexDot) {
-    var tempValue = value;
-    var length = indexDot;
-    var qtdComma = Math.floor((length - 1) / 3);
-    var firstComma = Math.floor(((length - 1) % 3) + 1);
-
-    for (let i = 0; i < qtdComma; i++) {
-        tempValue = tempValue.slice(0, firstComma + (3 * i) + i) + "," + tempValue.slice(firstComma + (3 * i) + i);
+function addComma(value) {
+    value += '';
+    var valueParts = value.split('.');
+    var firstPart = valueParts[0];
+    var secondPart = valueParts.length > 1 ? '.' + valueParts[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(firstPart)) {
+        firstPart = firstPart.replace(rgx, '$1' + ',' + '$2');
     }
-    return tempValue;
+    return firstPart + secondPart;
 }
 
 function verifyScreen(valueScreen) {
@@ -445,11 +461,12 @@ function verifyScreen(valueScreen) {
         valueScreen = valueScreen.substring(1, valueScreen.length);
     }
     valueScreen = cleanComma(valueScreen);
-    var indexDot = findDot(valueScreen);
-    if (indexDot > 3) {
-        valueScreen = addComma(valueScreen, indexDot);
-    }
+    valueScreen = addComma(valueScreen);
 
+    console.log("Dentro screen");
+    console.log(valueScreen);
+    console.log(valueScreen.length);
+    console.log("fim screen");
     if (fontSize(valueScreen.length) == 0) {
         if (isNegative == true) {
             valueScreen = "-" + valueScreen;
@@ -461,12 +478,12 @@ function verifyScreen(valueScreen) {
 }
 
 function fontSize(length) {
-    //console.log("tamanho = " + length);
+    // console.log("tamanho = " + length);
     if (length < 11) {
         res.style.fontSize = "33pt";
     } else if (length > 10 && length < 12) {
         res.style.fontSize = "28pt";
-    } else if (length > 12 && length < 15) {
+    } else if (length > 11 && length < 15) {
         res.style.fontSize = "24pt";
     } else if (length > 14) {
         res.style.fontSize = "24pt";
@@ -476,9 +493,9 @@ function fontSize(length) {
 }
 
 function lastIsDot(valueExpre) {
-    let lastSymbol = valueExpre.substring(valueExpre.length-1, valueExpre.length);
-    if(lastSymbol=="."){
-        valueExpre = valueExpre.substring(0, valueExpre.length-1);
+    let lastSymbol = valueExpre.substring(valueExpre.length - 1, valueExpre.length);
+    if (lastSymbol == ".") {
+        valueExpre = valueExpre.substring(0, valueExpre.length - 1);
     }
     return valueExpre;
 }
