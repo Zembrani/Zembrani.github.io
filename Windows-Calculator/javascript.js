@@ -1,10 +1,30 @@
 
 
 window.onload = function () {
-    click();
+    clickScreen();
 };
 
-function click() {
+//----------------------input from keyboard----//
+window.addEventListener('keydown', function (e) {
+    var key = e.key;
+    var keyboardNumbers = "0123456789/*-+";
+    var equal = "Enter";
+
+    if (keyboardNumbers.includes(key)) {
+        screen(key);
+    } else if (key == equal) {
+        document.getElementById("equal").click();
+    } else if (key == ".") {
+        document.getElementById("dot").click();
+    } else if (key == "Escape") {
+        document.getElementById("C").click();
+    } else if (key == "Backspace") {
+        document.getElementById("backspace").click();
+    }
+});
+
+//----------------------input from screen----//
+function clickScreen() {
     var button = document.querySelectorAll("#bottom span");
     var expression = document.getElementById("expression");
     var res = document.getElementById("res");
@@ -58,7 +78,7 @@ function screen(number) {
 
     //--------------------Add number on screen--------------------------//
     if (parseInt(number) > -1 && parseInt(number) < 10) {
-        // console.log("numero " + oldVal);
+        // console.log("numero oldval =  " + oldVal);
         if (oldVal == "2") {
             aux.innerHTML = "1";
             expression.innerHTML = "";
@@ -143,7 +163,7 @@ function screen(number) {
         oldVal = aux.innerHTML;
         lastSymbol = expreVal.substring(expreVal.length - 1, expreVal.length);
         // console.log("oldval equal = " + oldVal);
-        console.log("resval = " + resVal);
+        // console.log("resval = " + resVal);
 
         if (oldVal == "2") {
             // console.log("oldval == 2");
@@ -152,7 +172,14 @@ function screen(number) {
             // console.log("lastSymbol " + lastSymbol);
             var index = tempExpre.lastIndexOf(lastSymbol);
             if (index !== -1) {
+                if(tempExpre[index-1] == "e" || tempExpre[index-1] == "(") {
+                    // console.log("aqui ");
+                    let tempExpreAux = tempExpre.substring(0, index);
+                    // console.log("tempExpre Aux = " + tempExpreAux);
+                    var index = tempExpreAux.lastIndexOf(lastSymbol);
+                }
                 tempExpre = tempExpre.substring(index, tempExpre.length - 2);
+                console.log("tempExpre = " + tempExpre);
             }
 
             tempExpre = resVal + tempExpre;
@@ -167,14 +194,17 @@ function screen(number) {
             if (firstSymbol == "-") {
                 resVal = "(" + resVal + ")";
             }
+            // console.log("expression = " + expression.innerHTML);
+            expreVal = expression.innerHTML;
             tempExpre = expreVal + resVal;
         }
-                
+        // console.log("tempExpre = " + tempExpre);
+        // console.log("res.inner = " + Number(resVal));
         result = operation(tempExpre).toString();
         var firstSymbol = result.substring(0, 1);
         var length = firstSymbol == "-" ? result.length - 1 : result.length;
 
-        if (length > 12) {
+        if (length > 14) {
             expression.innerHTML = "";
             res.innerHTML = "Overflow";
         } else {
@@ -189,12 +219,19 @@ function screen(number) {
 
     function operation(expre) {
         let result = eval(expre).toString();
-        console.log("precision = " + getBigger(getRes(), result));
+        // console.log("precision = " + getBigger(getRes(), result));
+        // console.log("res = " + getRes());
+        // console.log("result = " + result);
         let length = getBigger(getRes(), result);
-        if(length>7) length = 7;
-        result = Number(result).toPrecision(length);
+        // console.log(length);
+        if (length > 12) {
+            // console.log("aqui");
+            result = Number(result).toPrecision(8);
+        }
         result = removeZerosAtRight(result);
-        console.log(result);
+        // console.log(result);
+        // console.log("tamanho final = " + result.length);
+        // console.log("formato final = " + result);
         return result;
     }
 
@@ -227,18 +264,15 @@ function screen(number) {
         verifyEqual();
 
         result = 1 / parseFloat(value);
-        result = result.toFixed(3);
+        result = operation(result);
         result = result.toString();
 
-        if (result.length > 11) {
-            expression.innerHTML = "";
-            res.innerHTML = "Overflow";
-        } else {
-            res.innerHTML = verifyScreen(result);
-            aux.innerHTML = "1";
-        }
+        res.innerHTML = verifyScreen(result);
+        aux.innerHTML = "1";
+
         if (value === "0") {
             res.innerHTML = "Cannot divide by zero";
+            res.style.fontSize = "20pt";
         }
         aux.innerHTML = "3";
     }
@@ -247,16 +281,15 @@ function screen(number) {
         verifyEqual();
 
         let value = getRes();
-        let result = parseFloat(Math.pow(value, 2).toFixed(3));
-        result =  operation(result).toString();
+        let result = Math.pow(value, 2);
+        result = operation(result);
+        // console.log("formato pow = " + result);
+        res.innerHTML = verifyScreen(result);
+        aux.innerHTML = "3";
+    }
 
-        if (result.length > 11) {
-            expression.innerHTML = "";
-            res.innerHTML = "Overflow";
-        } else {
-            res.innerHTML = verifyScreen(result);
-            aux.innerHTML = "3";
-        }
+    function verifyLength(result) {
+
     }
 
     sqrt.onclick = function () {
@@ -264,7 +297,8 @@ function screen(number) {
         verifyEqual();
 
         let value = getRes();
-        let result = parseFloat(Math.sqrt(value).toFixed(6));
+        let result = Math.sqrt(value);
+        result = operation(result);
         result = result.toString();
 
         res.innerHTML = verifyScreen(result);
@@ -287,12 +321,17 @@ function screen(number) {
             res.innerHTML = "0";
             return;
         }
+        if (expreVal == "") {
+            // console.log("porcentagem expreval = " + expreVal);
+            res.innerHTML = "0";
+        } else {
+            let valueAmount = eval(expreVal.substring(0, expreVal.length - 1));
 
-        let valueAmount = eval(expreVal.substring(0, expreVal.length - 1));
-
-        valuePrcentg = eval(valueAmount + "*" + valuePrcentg + "/100").toFixed(2);
-        expression.innerHTML = expreVal + valuePrcentg;
-        res.innerHTML = verifyScreen(valuePrcentg);
+            valuePrcentg = eval(valueAmount + "*" + valuePrcentg + "/100");
+            valuePrcentg = operation(valuePrcentg);
+            expression.innerHTML = expreVal + valuePrcentg;
+            res.innerHTML = verifyScreen(valuePrcentg);
+        }
     }
 
     //---------Memory functions----------------------//
@@ -344,7 +383,7 @@ function screen(number) {
     }
 
     function setMwindow(value) {
-        console.log(value);
+        // console.log(value);
         mwindow.innerHTML = verifyMemoryScreen(value);
         textSize();
         aux.innerHTML = "3";
@@ -386,20 +425,21 @@ function screen(number) {
     function getBigger(value1, value2) {
         let length1 = value1.length + 1;
         let length2 = value2.length + 1;
+        // console.log("Tamanhos res x result = " + length1 + " , " + length2);
         let value = length1 > length2 ? length1 : length2;
         // console.log("teste = " + teste);
-        return value > 11 ? 11 : value;
+        return value > 13 ? 13 : value;
     }
 
     function removeZerosAtRight(result) {
-        let cond = true;
+        let cond = result.includes(".") ? true : false;
         let indexOfe = result.indexOf("e");
         let resultAux;
-        if(indexOfe !== -1){
-            console.log("aqui");
+        if (indexOfe !== -1) {
+            // console.log("aqui");
             resultAux = result.split("e");
-            console.log(resultAux[0]);
-            console.log(resultAux[1]);
+            // console.log(resultAux[0]);
+            // console.log(resultAux[1]);
             result = resultAux[0];
         }
         while (cond == true) {
@@ -414,7 +454,7 @@ function screen(number) {
                 cond = false;
             }
         }
-        if(indexOfe !== -1) {
+        if (indexOfe !== -1) {
             let resultAux2 = result + "e" + resultAux[1].toString();
             return resultAux2.includes(".") ? result + "e" + resultAux[1].toString() : result + ".e" + resultAux[1].toString(); //2.e+11 and not 2e+11
         } else {
@@ -451,7 +491,7 @@ function verifyScreen(valueScreen) {
     var firstSymbol = valueScreen.substring(0, 1);
     var isNegative = false;
 
-    if (valueScreen == "NaN" || valueScreen.includes("O")) {
+    if (valueScreen == "NaN" || valueScreen.includes("O") || valueScreen.includes("nn")) {
         res.innerHTML = "0";
         return "0";
     }
@@ -463,10 +503,6 @@ function verifyScreen(valueScreen) {
     valueScreen = cleanComma(valueScreen);
     valueScreen = addComma(valueScreen);
 
-    console.log("Dentro screen");
-    console.log(valueScreen);
-    console.log(valueScreen.length);
-    console.log("fim screen");
     if (fontSize(valueScreen.length) == 0) {
         if (isNegative == true) {
             valueScreen = "-" + valueScreen;
